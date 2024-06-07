@@ -1,11 +1,11 @@
 import { useState, useRef } from "react";
 import Header from "./Header";
-import { checkValidData } from "../utils/Validate";
+import { checkValidData } from "../utils/validate.js";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../utils/Firebase";
+import { auth } from "../utils/firebase.js";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
