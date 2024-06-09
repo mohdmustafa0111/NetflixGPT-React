@@ -37,7 +37,7 @@ const Login = () => {
           // Signed up
           const user = userCredential.user;
           console.log(user);
-          navigate("./Browse");
+          navigate("./browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -55,7 +55,7 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
-          navigate("./Browse");
+          navigate("./browse");
         })
         .catch((error) => {
           const errorCode = error.code;
