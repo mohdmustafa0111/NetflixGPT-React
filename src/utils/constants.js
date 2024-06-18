@@ -3,3 +3,12 @@ export const LOGO =
 
 export const USER_AVATAR =
   "https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg";
+
+export const API_OPTIONS = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDQzNWM2MTVhNDBmNWZjMWUyNDkzMjA5YmE1MmMwZiIsInN1YiI6IjY2NzE3M2ZlNzc4M2ExNmQ5MmYyZjljMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ijOBBsBoMoX1zrEw2Dd2660pdk8GwupsOECWp8sUJsA",
+  },
+};
