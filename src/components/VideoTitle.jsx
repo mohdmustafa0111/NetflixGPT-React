@@ -1,5 +1,6 @@
 import React from "react";
 import { FaPlay } from "react-icons/fa";
+import { IoMdInformationCircleOutline } from "react-icons/io";
 
 const VideoTitle = ({ title, overview }) => {
   return (
@@ -12,7 +13,7 @@ const VideoTitle = ({ title, overview }) => {
           Play
         </button>
         <button className="bg-gray-400 text-white text-xl p-4 px-12 flex justify-center rounded-lg">
-          More Info
+          <IoMdInformationCircleOutline className="mx-1 text-3xl" /> More Info
         </button>
       </div>
     </div>
