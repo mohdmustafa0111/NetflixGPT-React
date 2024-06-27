@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { LOGO } from "../utils/constants";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -45,15 +46,26 @@ const Header = () => {
 
     // Unsubscribe when the component unmounts
     return () => unsubscribe();
+    // eslint-disable-next-line
   }, []);
+
+  const handleGptSearchClick = () => {
+    dispatch(toggleGptSearchView());
+  };
 
   return (
     <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
       <img className="w-48" src={LOGO} alt="logo" />
       {user && (
-        <div className="flex p-2">
+        <div className="flex p-2 items-center">
+          <button
+            className="py-2 px-4 mx-4 my-3 bg-purple-800 text-white rounded-lg"
+            onClick={handleGptSearchClick}
+          >
+            GPT Search
+          </button>
           <img className="w-11 h-11" src={user?.photoURL} alt="usericon" />
-          <button className="font-bold text-white" onClick={handleSignOut}>
+          <button className="font-bold mx-2 text-white" onClick={handleSignOut}>
             (Sign Out)
           </button>
         </div>
