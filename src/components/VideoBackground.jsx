@@ -21,15 +21,15 @@ const VideoBackground = ({ movieId }) => {
         referrerPolicy="strict-origin-when-cross-origin"
       ></iframe> */}
       <iframe
-        className="w-screen aspect-video -mt-3"
+        className="w-screen aspect-video -mt-4"
         src={
           "https://www.youtube.com/embed/hXzcyx9V0xw?si=iuGPha_bDFj25zsd" +
           "?&autoplay=1&mute=1"
         }
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
       ></iframe>
     </div>
   );
