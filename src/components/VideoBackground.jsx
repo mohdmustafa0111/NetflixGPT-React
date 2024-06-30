@@ -1,15 +1,15 @@
 import React from "react";
 import useMovieTrailer from "../hooks/useMovieTrailer";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 const VideoBackground = ({ movieId }) => {
-  const trailerVideo = useSelector((store) => store.movies?.trailerVideo);
+  // const trailerVideo = useSelector((store) => store.movies?.trailerVideo);
 
   useMovieTrailer(movieId);
 
   return (
     <div>
-      <iframe
+      {/* <iframe
         className="w-screen aspect-video"
         src={
           "https://www.youtube.com/embed/" +
@@ -19,6 +19,17 @@ const VideoBackground = ({ movieId }) => {
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
+      ></iframe> */}
+      <iframe
+        className="w-screen aspect-video -mt-3"
+        src={
+          "https://www.youtube.com/embed/hXzcyx9V0xw?si=iuGPha_bDFj25zsd" +
+          "?&autoplay=1&mute=1"
+        }
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
       ></iframe>
     </div>
   );
