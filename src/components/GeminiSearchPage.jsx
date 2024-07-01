@@ -5,7 +5,7 @@ import GeminiSearchBar from "./GeminiSearchBar";
 const GeminiSearchPage = () => {
   return (
     <div>
-      <div className="absolute -z-10">
+      <div className="fixed -z-10">
         <img src={BG_URL} alt="Logo" />
       </div>
       <GeminiSearchBar />
