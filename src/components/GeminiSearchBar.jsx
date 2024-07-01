@@ -7,7 +7,7 @@ import {
   HarmCategory,
 } from "@google/generative-ai";
 import { API_OPTIONS, GEMINIAPI_KEY } from "../utils/constants";
-import { addGptMovieResult } from "../utils/gptSlice";
+import { addGptMovieResult } from "../utils/geminiSlice";
 
 const GptSearchBar = () => {
   const langKey = useSelector((store) => store.config.lang);
@@ -31,7 +31,7 @@ const GptSearchBar = () => {
   const handleGptSearchClick = async () => {
     // Make an API call to get movie results
 
-    const gptQuery =
+    const geminiQuery =
       "Act as a Movie Recommendation system and suggest some movies for the query : " +
       searchText.current.value +
       ". only give me names of 5 movies, comma separated like the exmaple result given ahead. Example Result: Lagaan, Sholay, Don, Golmaal, Dhoom";
@@ -59,7 +59,7 @@ const GptSearchBar = () => {
       model: "gemini-1.5-flash",
       safetySettings,
     });
-    const gptResults = await model.generateContent(gptQuery);
+    const gptResults = await model.generateContent(geminiQuery);
     const response = await gptResults.response;
     const text = response.text();
     console.log(text);

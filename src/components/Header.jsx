@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { LOGO } from "../utils/constants";
-import { toggleGptSearchView } from "../utils/gptSlice";
+import { toggleGptSearchView } from "../utils/geminiSlice.js";
 import { SUPPORTED_LANGUAGES } from "../utils/constants.js";
 import { changeLanguage } from "../utils/configSlice.js";
 
@@ -13,7 +13,9 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
-  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
+  const showGeminiSearch = useSelector(
+    (store) => store.gemini.showGeminiSearch
+  );
 
   const handleSignOut = () => {
     signOut(auth)
@@ -65,7 +67,7 @@ const Header = () => {
       <img className="w-48" src={LOGO} alt="logo" />
       {user && (
         <div className="flex p-2 items-center">
-          {showGptSearch && (
+          {showGeminiSearch && (
             <select
               className="p-2 text-white bg-gray-800 rounded-lg"
               onChange={handleLanguageChange}
@@ -82,12 +84,18 @@ const Header = () => {
             className="py-2 px-4 mx-4 my-3 bg-purple-800 text-white rounded-lg"
             onClick={handleGptSearchClick}
           >
-            {showGptSearch ? "Home Page" : "GPT Search"}
+            {showGeminiSearch ? "Home Page" : "Gemini Search"}
           </button>
           <img className="w-11 h-11" src={user?.photoURL} alt="usericon" />
-          <button className="font-bold mx-2 text-white" onClick={handleSignOut}>
-            (Sign Out)
-          </button>
+          <div>
+            <div className="text-white pl-3">{user?.displayName}</div>
+            <button
+              className="font-bold mx-2 text-white"
+              onClick={handleSignOut}
+            >
+              (Sign Out)
+            </button>
+          </div>
         </div>
       )}
     </div>

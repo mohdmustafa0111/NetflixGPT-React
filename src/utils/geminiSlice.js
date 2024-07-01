@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const gptSlice = createSlice({
-  name: "gpt",
+const geminiSlice = createSlice({
+  name: "gemini",
   initialState: {
-    showGptSearch: false,
+    showGeminiSearch: false,
     movieNames: null,
     movieResults: null,
   },
   reducers: {
     toggleGptSearchView: (state) => {
-      state.showGptSearch = !state.showGptSearch;
+      state.showGeminiSearch = !state.showGeminiSearch;
     },
     addGptMovieResult: (state, action) => {
       const { movieNames, movieResults } = action.payload;
@@ -19,6 +19,6 @@ const gptSlice = createSlice({
   },
 });
 
-export const { toggleGptSearchView, addGptMovieResult } = gptSlice.actions;
+export const { toggleGptSearchView, addGptMovieResult } = geminiSlice.actions;
 
-export default gptSlice.reducer;
+export default geminiSlice.reducer;
