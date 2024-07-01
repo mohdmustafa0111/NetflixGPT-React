@@ -1,15 +1,28 @@
 import { useRef } from "react";
 import lang from "../utils/languageConstants";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { GEMINIAPI_KEY } from "../utils/constants";
+import { API_OPTIONS, GEMINIAPI_KEY } from "../utils/constants";
+import { addGptMovieResult } from "../utils/gptSlice";
 
 const GptSearchBar = () => {
   const langKey = useSelector((store) => store.config.lang);
   const genAI = new GoogleGenerativeAI(GEMINIAPI_KEY);
   const searchText = useRef(null);
+  const dispatch = useDispatch();
 
   // Search movie in TMDB
+  const searchMovieTMDB = async (movie) => {
+    const data = await fetch(
+      "https://api.themoviedb.org/3/search/movie?query=" +
+        movie +
+        "&include_adult=false&language=en-US&page=1",
+      API_OPTIONS
+    );
+    const json = await data.json();
+
+    return json.results;
+  };
 
   const handleGptSearchClick = async () => {
     // Make an API call to get movie results
@@ -27,6 +40,17 @@ const GptSearchBar = () => {
 
     const gptMovies = text.split(",");
     console.log(gptMovies);
+
+    // For each movie I will search TMDB API
+
+    const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
+
+    const tmdbResults = await Promise.all(promiseArray);
+    console.log(tmdbResults);
+
+    dispatch(
+      addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults })
+    );
   };
 
   return (
