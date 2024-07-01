@@ -1,7 +1,11 @@
 import { useRef } from "react";
 import lang from "../utils/languageConstants";
 import { useSelector, useDispatch } from "react-redux";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import {
+  GoogleGenerativeAI,
+  HarmBlockThreshold,
+  HarmCategory,
+} from "@google/generative-ai";
 import { API_OPTIONS, GEMINIAPI_KEY } from "../utils/constants";
 import { addGptMovieResult } from "../utils/gptSlice";
 
@@ -32,7 +36,29 @@ const GptSearchBar = () => {
       searchText.current.value +
       ". only give me names of 5 movies, comma separated like the exmaple result given ahead. Example Result: Lagaan, Sholay, Don, Golmaal, Dhoom";
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const safetySettings = [
+      {
+        category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+        threshold: HarmBlockThreshold.BLOCK_NONE,
+      },
+      {
+        category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+        threshold: HarmBlockThreshold.BLOCK_NONE,
+      },
+      {
+        category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+        threshold: HarmBlockThreshold.BLOCK_NONE,
+      },
+      {
+        category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+        threshold: HarmBlockThreshold.BLOCK_NONE,
+      },
+    ];
+
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash",
+      safetySettings,
+    });
     const gptResults = await model.generateContent(gptQuery);
     const response = await gptResults.response;
     const text = response.text();
